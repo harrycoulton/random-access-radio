@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "random-access-radio"
+    }
+  },
+  "defaultProject": "random-access-radio",
+  "cli": {
+    "analytics": "ad26eb66-29af-4b5a-b8fc-e62f32adc941"
+  }
 }
