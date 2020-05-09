@@ -18,9 +18,4 @@ export class SessionInfoComponent implements OnInit {
     });
   }
 
-  public loadStation = (station) => {
-    this.radioService.currentStation = station;
-    this.radioService.currentStationChange.next(station);
-  }
-
 }

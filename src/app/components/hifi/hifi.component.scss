@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  border: 1px solid black;
+  &__speaker {
+    flex: 0 0 30%;
+    border: 1px solid black;
+  }
+  &__player{
+    border: 1px solid black;
+    flex: 0 0 40%;
+  }
+}

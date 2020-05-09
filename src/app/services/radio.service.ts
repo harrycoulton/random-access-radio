@@ -13,9 +13,12 @@ export class RadioService {
   public sessionList = [];
   public volume: number;
   public stationError = false;
+  public searchTermChange: BehaviorSubject<string> = new BehaviorSubject<string>(this.currentSearchTerm);
   public stationErrorChange: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public sessionListChange: BehaviorSubject<StationModel[]> = new BehaviorSubject<StationModel[]>(this.sessionList);
   public currentStationChange: BehaviorSubject<StationModel> = new BehaviorSubject<StationModel>(this.currentStation);
+  public showPlayer: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public counter = 0;
 
   constructor(private http: HttpClient) {}
 
@@ -29,9 +32,10 @@ export class RadioService {
                 this.currentStation = undefined;
                 this.stationError = true;
                 this.stationErrorChange.next(this.stationError);
-                console.log('error logged in service');
+                this.showPlayer.next(false);
               } else {
                 this.stationError = false;
+                this.showPlayer.next(true);
                 this.stationErrorChange.next(this.stationError);
                 const randomStation = this.randomArrayItem(data);
                 this.currentStation = {
@@ -58,6 +62,11 @@ export class RadioService {
       this.sessionList.push(this.currentStation);
       this.sessionListChange.next(this.sessionList);
     }
+  }
+
+  public loadStation = (station) => {
+    this.currentStation = station;
+    this.currentStationChange.next(station);
   }
 
 }

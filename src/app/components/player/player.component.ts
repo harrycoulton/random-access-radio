@@ -14,10 +14,6 @@ export class PlayerComponent implements OnInit {
     src: 'assets/static.mp3',
     format: 'mp3',
     volume: this.radioService.volume});
-  public failedSearch = new Howl({
-    src: 'assets/fail.mp3',
-    format: 'mp3',
-    volume: this.radioService.volume});
   public currentStation: StationModel;
   public stationError: boolean;
   public loading = true;
@@ -30,19 +26,25 @@ export class PlayerComponent implements OnInit {
     this.radioService.stationErrorChange.subscribe(value => {
       this.stationError = value;
       if (this.stationError && this.sound){
-        this.currentStation = undefined;
+        this.static.unload();
         this.sound.unload();
-        this.failedSearch.play();
+        this.currentStation = undefined;
+        this.sound = undefined;
       }
     });
     this.radioService.currentStationChange.subscribe(value => {
       this.currentStation = value;
-      if (this.sound) {this.sound.unload(); }
+      if (this.sound) {
+        this.sound.unload();
+        this.sound = undefined;
+      }
       this.static.load();
       this.static.play();
       this.loaded = false;
       this.loading = true;
-      this.setStation(this.currentStation.url, this.currentStation.codec);
+      if (!this.sound) {
+        this.setStation(this.currentStation.url, this.currentStation.codec);
+      }
       this.sound.on('load', () => {
         this.static.unload();
         this.loaded = true;
@@ -61,23 +63,29 @@ export class PlayerComponent implements OnInit {
       src: [radioUrl],
       format: [radioFormat],
       volume: this.radioService.volume,
-      html5: true
+      html5: true,
+      autoplay: false
     });
   }
 
   public play = () => {
-    this.sound.play();
+    if (!this.sound.playing()){
+      this.sound.play();
+    }
   }
 
   public pause = () => {
     this.sound.pause();
-    this.sound.unload();
   }
 
   public setVolume = (event) => {
     this.radioService.volume = event.value / 10;
     this.sound.volume(this.radioService.volume);
     this.static.volume(this.radioService.volume);
+  }
+
+  public capitalizeFirstLetter = (text) => {
+    return text.charAt(0).toUpperCase() + text.slice(1);
   }
 
 }

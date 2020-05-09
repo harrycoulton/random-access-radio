@@ -11,6 +11,10 @@ import { SessionInfoComponent } from './components/session-info/session-info.com
 import { PlayerContainerComponent } from './components/player-container/player-container.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSliderModule} from '@angular/material/slider';
+import { SearchFailedComponent } from './components/search-failed/search-failed.component';
+import {NgMarqueeModule} from 'ng-marquee';
+import { SpeakerComponent } from './components/speaker/speaker.component';
+import { HifiComponent } from './components/hifi/hifi.component';
 
 
 @NgModule({
@@ -20,6 +24,9 @@ import {MatSliderModule} from '@angular/material/slider';
     SearchComponent,
     SessionInfoComponent,
     PlayerContainerComponent,
+    SearchFailedComponent,
+    SpeakerComponent,
+    HifiComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +34,8 @@ import {MatSliderModule} from '@angular/material/slider';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSliderModule
+    MatSliderModule,
+    NgMarqueeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

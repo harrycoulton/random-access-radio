@@ -1,22 +1,28 @@
-<div class="container">
-  <div class="loading" *ngIf="loading">
+<div class="loading" *ngIf="loading">
     TWIDDLING DIALS
   </div>
+  <div class="visualiser">
+    I am a visualiser
+  </div>
 <div class="nowplaying" *ngIf="loaded">
-  <h3>Now playing:</h3>
-  <h3>{{ currentStation.name }}</h3>
-  <h3>{{ currentStation.language }}</h3>
-  <h3>Country: {{ currentStation.country }}</h3>
-  <h3 *ngIf="currentStation.region">Region: {{ currentStation.region }}</h3>
-  <h3><a>Visit site: {{currentStation.url}}</a></h3></div>
+  <h3>Now playing:&nbsp;</h3>
+  <h3>{{ currentStation.name }}&nbsp;</h3>
+  <ng-marquee  speed="normal">
+    <div class="nowplaying__marquee">
+      <h3>Language: {{ capitalizeFirstLetter(currentStation.language) }} -&nbsp;</h3>
+      <h3>Location: <span *ngIf="currentStation.region">{{ currentStation.region }}, </span>{{ currentStation.country }} -&nbsp;</h3>
+      <h3 *ngIf="currentStation.homepage"><a [href]="currentStation.homepage" target="_blank">Visit homepage</a></h3>
+    </div>
+  </ng-marquee>
+  </div>
 <div class="player">
-  <div class="player__play" [ngClass]="loaded ? 'loaded' : 'loading'">
+  <div class="player__play player__controls" [ngClass]="loaded ? 'loaded' : 'loading'">
     <svg (click)="play()" class="player__play--icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M23 12l-22 12v-24l22 12zm-21 10.315l18.912-10.315-18.912-10.315v20.63z"/></svg>
   </div>
-  <div class="player__pause">
+  <div class="player__pause player__controls">
     <svg (click)="pause()" class="player__pause--icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M10 24h-6v-24h6v24zm10 0h-6v-24h6v24zm-11-23h-4v22h4v-22zm10 0h-4v22h4v-22z"/></svg>
   </div>
-  <div class="player__volume">
+  <div class="player__volume player__controls">
     <mat-slider
       class="player__volume--controls"
       color="primary"
@@ -25,5 +31,4 @@
       value="5"
       (change)="setVolume($event)"></mat-slider>
   </div>
-</div>
 </div>

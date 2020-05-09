@@ -1,4 +1,7 @@
-<form>
-  <input type="text" #searchTerm>
-  <input type="submit" (click)="radioService.getRadioStation(searchTerm.value)">
-</form>
+<div class="container">
+  <h2 class="container__title">Search any genre:</h2>
+  <input class="container__searchbox" type="text" #searchTerm [value]="search ? search : ''">
+  <div class="container__go" (click)="radioService.getRadioStation(searchTerm.value)">
+    <img class="container__go--icon" src="assets/symbols.svg">
+  </div>
+</div>

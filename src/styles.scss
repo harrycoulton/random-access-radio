@@ -1,9 +1,15 @@
+@font-face {
+  font-family: 'hifi';
+  src: url('src/assets/fonts/retro.ttf') format('truetype');
+}
+
 * {
   box-sizing: border-box;
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'hifi', monospace;
+  font-size: 1.5rem;
   margin: 0;
   word-wrap: break-word;
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; }

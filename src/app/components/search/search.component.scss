@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  &__searchbox {
+    background: rgba(172, 172, 172, 0.4);
+    border: none;
+    :focus {
+      border: 1px solid rgba(73, 172, 64, 0.7);;
+    }
+  }
+  &__go {
+    border: 1px solid red;
+    &--icon {
+      height: 1.5rem;
+    }
+  }
+}
