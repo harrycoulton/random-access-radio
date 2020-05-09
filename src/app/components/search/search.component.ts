@@ -7,6 +7,5 @@ import {RadioService} from '../../services/radio.service';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent {
-
   constructor(public radioService: RadioService) { }
 }

@@ -1,0 +1,30 @@
+.container {
+  border: 1px solid black;
+  &__session {
+    border: 1px solid red;
+  }
+}
+
+.loaded {
+  border: 10px solid green;
+}
+
+.loading {
+  border: 1px solid blue;
+}
+
+mat-slider {
+  border: 1px solid gray;
+  width: 300px;
+  ::ng-deep {
+    .mat-slider-wrapper {
+      border: 1px solid black;
+    }
+    .mat-slider-thumb {
+      border: 1px solid black;
+    }
+    .mat-focus-indicator {
+      border: 1px solid red;
+    }
+  }
+}

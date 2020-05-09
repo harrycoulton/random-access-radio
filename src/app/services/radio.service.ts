@@ -1,25 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RadioService {
-  public baseUrl = 'http://www.radio-browser.info/webservice/json/stations/bytag/';
+  public baseUrl = 'https://fr1.api.radio-browser.info/json/stations/bytag/';
   public currentStation;
+  public lastStation;
+  public sessionList = [];
+  public stationError = false;
+  public volume: number;
+  public serverResponse;
+  public apiError = false;
+  public baseUrlList;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public getRadioStation = async (searchTerm) => {
-    await this.http
-      .get<any>(this.baseUrl + searchTerm)
-      .subscribe(data => {
-        this.currentStation = this.randomArrayItem(data);
-        console.log(this.currentStation);
-      });
-  }
+        if (this.currentStation) { this.lastStation = this.currentStation; }
+        this.http
+          .get(this.baseUrl + searchTerm)
+          .subscribe(
+            data => this.currentStation = this.randomArrayItem(data),
+            error1 => this.stationError = true);
+        if (this.stationError){
+          // do something
+        }
+      }
 
   public randomArrayItem = (array) => {
     const randomArrayInt = (Math.floor(Math.random() * Math.floor(array.length)));
