@@ -1,48 +1,59 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import { Howl, Howler } from 'howler';
-import {RadioService} from '../../services/radio.service';
+import { Component, OnInit } from '@angular/core';
+import { Howl } from 'howler';
+import { RadioService } from '../../services/radio.service';
+import { StationModel } from '../../models/station.model';
 
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
-  styleUrls: ['./player.component.scss']
+  styleUrls: ['./player.component.scss'],
 })
-export class PlayerComponent implements OnInit, OnChanges {
+export class PlayerComponent implements OnInit {
   public sound: Howl;
   public static = new Howl({
     src: 'assets/static.mp3',
     format: 'mp3',
     volume: this.radioService.volume});
-  public currentStation;
-  public lastStation;
+  public failedSearch = new Howl({
+    src: 'assets/fail.mp3',
+    format: 'mp3',
+    volume: this.radioService.volume});
+  public currentStation: StationModel;
+  public stationError: boolean;
   public loading = true;
   public loaded = false;
-  @Input() public radioUrl: string;
-  @Input() public radioFormat: string;
 
-  constructor(public radioService: RadioService) {
+  constructor(private radioService: RadioService) {
   }
 
   ngOnInit(): void {
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.static.load();
-    this.static.play();
-    if (!this.radioService.sessionList.includes(this.radioService.currentStation)){
-      this.radioService.sessionList.push(this.radioService.currentStation);
-    }
-    this.currentStation = this.radioService.currentStation;
-    if (changes.radioUrl.previousValue){
-      this.sound.unload();
-      this.lastStation = changes.radioUrl.previousValue;
-    }
-    this.setStation(this.radioUrl, this.radioFormat);
-    this.sound.on('load', () => {
-      this.static.unload();
-      this.loaded = !this.loaded;
+    this.radioService.stationErrorChange.subscribe(value => {
+      this.stationError = value;
+      if (this.stationError && this.sound){
+        this.currentStation = undefined;
+        this.sound.unload();
+        this.failedSearch.play();
+      }
     });
-    this.sound.play();
+    this.radioService.currentStationChange.subscribe(value => {
+      this.currentStation = value;
+      if (this.sound) {this.sound.unload(); }
+      this.static.load();
+      this.static.play();
+      this.loaded = false;
+      this.loading = true;
+      this.setStation(this.currentStation.url, this.currentStation.codec);
+      this.sound.on('load', () => {
+        this.static.unload();
+        this.loaded = true;
+        this.loading = false;
+        this.radioService.addToSessionList();
+      });
+      this.sound.on('loaderror', () => {
+        this.radioService.getRadioStation(this.radioService.currentSearchTerm);
+      });
+      this.sound.play();
+    });
   }
 
   public setStation = (radioUrl, radioFormat) => {
@@ -60,11 +71,13 @@ export class PlayerComponent implements OnInit, OnChanges {
 
   public pause = () => {
     this.sound.pause();
+    this.sound.unload();
   }
 
   public setVolume = (event) => {
     this.radioService.volume = event.value / 10;
     this.sound.volume(this.radioService.volume);
+    this.static.volume(this.radioService.volume);
   }
 
 }

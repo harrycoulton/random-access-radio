@@ -1,0 +1,5 @@
+<app-player *ngIf="radioService.currentStation"></app-player>
+<div class="error" *ngIf="radioService.stationError">
+  That search didn't return anything, maybe try one of these?
+</div>
+<app-session-info *ngIf="radioService.currentStation"></app-session-info>

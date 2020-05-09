@@ -1,37 +1,63 @@
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {BehaviorSubject} from 'rxjs';
+import {StationModel} from '../models/station.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RadioService {
   public baseUrl = 'https://fr1.api.radio-browser.info/json/stations/bytag/';
-  public currentStation;
-  public lastStation;
+  public currentStation: StationModel;
+  public currentSearchTerm;
   public sessionList = [];
-  public stationError = false;
   public volume: number;
-  public serverResponse;
-  public apiError = false;
-  public baseUrlList;
+  public stationError = false;
+  public stationErrorChange: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public sessionListChange: BehaviorSubject<StationModel[]> = new BehaviorSubject<StationModel[]>(this.sessionList);
+  public currentStationChange: BehaviorSubject<StationModel> = new BehaviorSubject<StationModel>(this.currentStation);
 
   constructor(private http: HttpClient) {}
 
   public getRadioStation = async (searchTerm) => {
-        if (this.currentStation) { this.lastStation = this.currentStation; }
+        this.currentSearchTerm = searchTerm;
         this.http
           .get(this.baseUrl + searchTerm)
           .subscribe(
-            data => this.currentStation = this.randomArrayItem(data),
-            error1 => this.stationError = true);
-        if (this.stationError){
-          // do something
-        }
+            data => {
+              if (!Object.keys(data).length){
+                this.currentStation = undefined;
+                this.stationError = true;
+                this.stationErrorChange.next(this.stationError);
+                console.log('error logged in service');
+              } else {
+                this.stationError = false;
+                this.stationErrorChange.next(this.stationError);
+                const randomStation = this.randomArrayItem(data);
+                this.currentStation = {
+                  name: randomStation.name,
+                  codec: randomStation.codec,
+                  country: randomStation.country,
+                  region: randomStation.state,
+                  language: randomStation.language,
+                  homepage: randomStation.homepage,
+                  url: randomStation.url
+                };
+                this.currentStationChange.next(this.currentStation);
+              }
+            });
       }
 
   public randomArrayItem = (array) => {
     const randomArrayInt = (Math.floor(Math.random() * Math.floor(array.length)));
     return array[randomArrayInt];
+  }
+
+  public addToSessionList = () => {
+    if (!this.sessionList.includes(this.currentStation)){
+      this.sessionList.push(this.currentStation);
+      this.sessionListChange.next(this.sessionList);
+    }
   }
 
 }

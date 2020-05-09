@@ -1,0 +1,11 @@
+.container {
+  border: 1px solid red;
+  &__last-station {
+    border: 1px solid blue;
+    &--reload {
+      border: 2px solid purple;
+      background: white;
+      cursor: pointer;
+    }
+  }
+}

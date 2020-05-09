@@ -1,0 +1,7 @@
+<div class="container" *ngIf="sessionList.length > 0">
+  <h3>Stations this session:</h3>
+  <div *ngFor="let item of sessionList">
+    <p>{{ item.name }}</p>
+    <p (click)="loadStation(item)">Reload?</p>
+  </div>
+</div>
