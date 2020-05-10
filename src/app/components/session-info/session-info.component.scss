@@ -1,11 +1,27 @@
+@import "src/styles.scss";
+
 .container {
-  border: 1px solid red;
-  &__last-station {
-    border: 1px solid blue;
-    &--reload {
-      border: 2px solid purple;
-      background: white;
-      cursor: pointer;
+  padding: {
+    top: 0;
+    left: 2rem;
+  }
+  max-height: 30vh;
+  border-left: 1px solid $faded-gray;
+  &__heading {
+    color: $digital-green;
+    margin-bottom: 1rem;
+  }
+  &__station {
+    padding: 5px;
+    background: $faded-gray;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 0.4rem;
+    &:hover {
+      background: $faded-gray-hover;
+    }
+    &:active {
+      background: $digital-green;
     }
   }
 }

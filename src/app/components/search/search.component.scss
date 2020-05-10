@@ -1,16 +1,39 @@
+@import "src/styles.scss";
+
+$bar-height: 2rem;
+$search-size: 2rem;
+$search-padding: 1rem;
+
 .container {
   display: flex;
+  align-items: flex-end;
+  padding: 0;
   &__searchbox {
-    background: rgba(172, 172, 172, 0.4);
+    padding: $search-padding;
+    font-size: $search-size;
+    background: $faded-gray;
     border: none;
+    color: $white;
     :focus {
       border: 1px solid rgba(73, 172, 64, 0.7);;
     }
   }
   &__go {
-    border: 1px solid red;
-    &--icon {
-      height: 1.5rem;
+    padding: $search-padding;
+    font-size: $search-size;
+    color: $white;
+    background: $faded-gray;
+    border: none;
+    margin-left: 2rem;
+    &:hover {
+      background: $faded-gray-hover;
+      cursor: pointer;
+    }
+    &:active {
+      background: $lime-green;
+    }
+    &:focus {
+      outline: 0;
     }
   }
 }

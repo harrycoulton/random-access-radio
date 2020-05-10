@@ -1,20 +1,25 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem 0;
-  &__speaker {
-    border: 3px solid black;
-    border-radius: 10%;
-    padding: 1rem;
-    &--1 {
-      border-bottom: none;
-    }
-    &--2 {
-      border-top: none;
-    }
-    &--icon {
-      height: 15rem;
-    }
-  }
-}
+//.container {
+//  display: flex;
+//  flex-direction: column;
+//  align-items: center;
+//  padding: 1rem 0;
+//  &__speaker {
+//    border: 3px solid black;
+//    border-radius: 10%;
+//    padding: 1rem;
+//    background-image: url("src/assets/wooden.jpeg");
+//    &--1 {
+//      border-bottom: none;
+//    }
+//    &--2 {
+//      border-top: none;
+//    }
+//    &--icon1 {
+//      height: 12rem;
+//    }
+//    &--icon2 {
+//      height: 15rem;
+//    }
+//  }
+//}
+//

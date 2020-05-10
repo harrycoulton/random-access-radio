@@ -45,7 +45,8 @@ export class RadioService {
                   region: randomStation.state,
                   language: randomStation.language,
                   homepage: randomStation.homepage,
-                  url: randomStation.url
+                  url: randomStation.url,
+                  tags: randomStation.tags
                 };
                 this.currentStationChange.next(this.currentStation);
               }

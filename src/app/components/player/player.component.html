@@ -1,34 +1,33 @@
-<div class="loading" *ngIf="loading">
-    TWIDDLING DIALS
-  </div>
-  <div class="visualiser">
-    I am a visualiser
-  </div>
-<div class="nowplaying" *ngIf="loaded">
-  <h3>Now playing:&nbsp;</h3>
-  <h3>{{ currentStation.name }}&nbsp;</h3>
-  <ng-marquee  speed="normal">
-    <div class="nowplaying__marquee">
-      <h3>Language: {{ capitalizeFirstLetter(currentStation.language) }} -&nbsp;</h3>
-      <h3>Location: <span *ngIf="currentStation.region">{{ currentStation.region }}, </span>{{ currentStation.country }} -&nbsp;</h3>
-      <h3 *ngIf="currentStation.homepage"><a [href]="currentStation.homepage" target="_blank">Visit homepage</a></h3>
+<div class="container">
+  <div class="player" data-aos="fade-left">
+    <div class="player__play player__controls" [ngClass]="loaded ? 'loaded' : 'loading'">
+      <svg (click)="play()" [ngClass]="loaded ? 'loaded' : 'loading'" class="player__play--icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
+        <path d="M23 12l-22 12v-24l22 12zm-21 10.315l18.912-10.315-18.912-10.315v20.63z"/>
+      </svg>
     </div>
-  </ng-marquee>
+    <div class="player__pause player__controls">
+      <svg (click)="pause()" class="player__pause--icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M10 24h-6v-24h6v24zm10 0h-6v-24h6v24zm-11-23h-4v22h4v-22zm10 0h-4v22h4v-22z"/></svg>
+    </div>
+    <div class="player__volume player__controls">
+      <mat-slider
+        class="player__volume--controls"
+        color="primary"
+        min="0"
+        max="10"
+        value="5"
+        (change)="setVolume($event)"></mat-slider>
+    </div>
   </div>
-<div class="player">
-  <div class="player__play player__controls" [ngClass]="loaded ? 'loaded' : 'loading'">
-    <svg (click)="play()" class="player__play--icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M23 12l-22 12v-24l22 12zm-21 10.315l18.912-10.315-18.912-10.315v20.63z"/></svg>
-  </div>
-  <div class="player__pause player__controls">
-    <svg (click)="pause()" class="player__pause--icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M10 24h-6v-24h6v24zm10 0h-6v-24h6v24zm-11-23h-4v22h4v-22zm10 0h-4v22h4v-22z"/></svg>
-  </div>
-  <div class="player__volume player__controls">
-    <mat-slider
-      class="player__volume--controls"
-      color="primary"
-      min="0"
-      max="10"
-      value="5"
-      (change)="setVolume($event)"></mat-slider>
+
+  <div class="nowplaying" *ngIf="loaded" data-aos="fade-left">
+    <h4>{{ currentStation.name }}</h4>
+    <h5>Language: <span class="nowplaying--info">{{ capitalizeFirstLetter(currentStation.language) }}</span></h5>
+    <h5>Location:
+      <span class="nowplaying--info" *ngIf="currentStation.region">{{ currentStation.region }}, </span>
+      <span class="nowplaying--info">{{ currentStation.country }}</span>
+    </h5>
+    <h5>Tags: <span class="nowplaying--info"> {{ currentStation.tags }}</span></h5>
+    <h5 *ngIf="currentStation.homepage"><a class="nowplaying__link" [href]="currentStation.homepage" target="_blank">Visit homepage</a></h5>
   </div>
 </div>
+

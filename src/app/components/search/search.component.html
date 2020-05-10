@@ -1,7 +1,8 @@
 <div class="container">
-  <h2 class="container__title">Search any genre:</h2>
-  <input class="container__searchbox" type="text" #searchTerm [value]="search ? search : ''">
-  <div class="container__go" (click)="radioService.getRadioStation(searchTerm.value)">
-    <img class="container__go--icon" src="assets/symbols.svg">
-  </div>
+  <form>
+    <input class="container__searchbox" type="text" #searchTerm [value]="search ? search : ''">
+    <button type="submit" class="container__go" (click)="radioService.getRadioStation(searchTerm.value)">
+     <span>go</span>
+    </button>
+  </form>
 </div>

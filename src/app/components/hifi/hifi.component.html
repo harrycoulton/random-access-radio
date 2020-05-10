@@ -1,5 +1,18 @@
-<div class="container">
-  <app-speaker class="container__speaker"></app-speaker>
-  <app-player-container class="container__player"></app-player-container>
-  <app-speaker class="container__speaker"></app-speaker>
+<div class="container" data-aos="fade-up">
+  <div class="container__main-module">
+    <div class="container__main-module__text">
+      <h1 class="container__main-module__text--heading">random_access_radio</h1>
+      <p class="container__main-module__text--instructions">Type in a genre and hit go to hear a random radio station</p>
+    </div>
+    <app-search></app-search>
+    <div class="container__main-module__playerinfo">
+      <app-player-container class="container__main-module__player" data-aos="fade-right"></app-player-container>
+    </div>
+  </div>
+  <div class="container__session">
+    <app-session-info data-aos="fade-down"></app-session-info>
+  </div>
 </div>
+
+
+

@@ -1,7 +1,5 @@
 <div class="container">
-  <h1>RANDOM_ACCESS_RADIO</h1>
-  <app-search></app-search>
   <app-player *ngIf="player"></app-player>
   <app-search-failed class="error" *ngIf="radioService.stationError"></app-search-failed>
-  <app-session-info *ngIf="radioService.currentStation"></app-session-info>
 </div>
+

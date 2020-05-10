@@ -7,6 +7,7 @@ import {RadioService} from '../../services/radio.service';
   styleUrls: ['./player-container.component.scss']
 })
 export class PlayerContainerComponent implements OnInit {
+  public audioContext = window.AudioContext;
   public player: boolean;
 
   constructor(public radioService: RadioService) { }

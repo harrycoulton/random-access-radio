@@ -1,12 +1,35 @@
-.container {
+@import "src/styles.scss";
+
+$heading-size: 3rem;
+
+:host {
   display: flex;
-  border: 1px solid black;
-  &__speaker {
-    flex: 0 0 30%;
-    border: 1px solid black;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  padding-top: 10rem;
+}
+
+.container {
+  flex: 0 0 60%;
+  display: flex;
+  &__main-module {
+    flex: 0 0 65%;
+    padding-right: 2rem;
+    &__text {
+      padding-bottom: 1rem;
+      &--heading {
+        color: $lime-green;
+        font-size: $heading-size;
+        padding-bottom: 0.2rem;
+      }
+      &--instructions {
+        color: $white;
+        font-size: $normal-text;
+      }
+    }
   }
-  &__player{
-    border: 1px solid black;
-    flex: 0 0 40%;
+  &__session {
+    flex: 0 0 35%;
   }
 }

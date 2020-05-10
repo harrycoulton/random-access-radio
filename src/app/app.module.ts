@@ -26,7 +26,7 @@ import { HifiComponent } from './components/hifi/hifi.component';
     PlayerContainerComponent,
     SearchFailedComponent,
     SpeakerComponent,
-    HifiComponent,
+    HifiComponent
   ],
   imports: [
     BrowserModule,

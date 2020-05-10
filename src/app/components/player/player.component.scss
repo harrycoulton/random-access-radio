@@ -1,50 +1,69 @@
+@import "src/styles.scss";
 
-.loaded {
-  border: 10px solid green;
-}
-
-.loading {
-  border: 1px solid blue;
+.container {
+  padding-top: 2rem;
 }
 
 .player {
   display: flex;
+  margin-bottom: 1rem;
   &__controls {
-    flex: 0 0 30%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   &__play {
-    border: 1px solid red;
+    flex: 0 0 20%;
+    border: 1px solid black;
+    &--icon{
+    }
   }
   &__pause{
-    border: 1px solid red;
+    flex: 0 0 20%;
+    &--icon{}
   }
   &__volume {
-    border: 1px solid red;
+    flex: 0 0 40%;
+    &--icon{}
   }
 }
 
+.loading {
+  animation: flashing 1s linear infinite; }
+
 .nowplaying {
   display: flex;
-  &__marquee {
-    display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  h4 {
+    font-size: 1.5rem;
+    color: $lime-green;
+    margin-bottom: 0.7rem;
+  }
+  h5 {
+    font-size: 1.2rem;
+    color: $digital-green;
+    margin-bottom: 0.4rem;
+  }
+  &--info {
+    color: $white;
+  }
+  &__link {
+    text-decoration: none;
+    color: #d5abff;
+    &:hover {
+      color: $white;
+      cursor: pointer;
+    }
   }
 }
 
 mat-slider {
-  border: 1px solid gray;
-  width: 300px;
-  ::ng-deep {
-    .mat-slider-wrapper {
-      border: 1px solid black;
-    }
-    .mat-slider-thumb {
-      border: 1px solid black;
-    }
-    .mat-focus-indicator {
-      border: 1px solid red;
-    }
-  }
+  width: 10rem;
 }
+
+@keyframes flashing {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }

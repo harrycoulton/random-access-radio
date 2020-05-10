@@ -1,15 +1,33 @@
-@font-face {
-  font-family: 'hifi';
-  src: url('src/assets/fonts/retro.ttf') format('truetype');
-}
+$digital-green: rgb(87, 242, 49);
+$lime-green: #23ff23;
+$faded-gray: rgba(103, 103, 103, 0.51);
+$faded-gray-hover: rgba(175, 175, 175, 0.51);
+$white: #ffffff;
+
+$normal-text: 1.3rem;
 
 * {
   box-sizing: border-box;
-  font-family: 'hifi', monospace;
-  font-size: 1.5rem;
+  font-family: 'robotomono', "Roboto Mono", monospace;
+  font-weight: normal;
   margin: 0;
   word-wrap: break-word;
 }
 
 html, body { height: 100%; }
-body { margin: 0; }
+body {
+  margin: 0;
+  background-image: linear-gradient(to right top,
+    #913519,
+    #993d18,
+    #a14616,
+    #a84f14,
+    #af5811,
+    #b7640d,
+    #bf7106,
+    #c57e00,
+    #cd9200,
+    #d3a600,
+    #d6bb00,
+    #d7d009);
+}

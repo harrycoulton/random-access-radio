@@ -6,4 +6,5 @@ export interface StationModel {
   language: string;
   homepage: string;
   url: string;
+  tags: string;
 }

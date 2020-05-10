@@ -1,7 +1,6 @@
-<div class="container" *ngIf="sessionList.length > 0">
-  <h3>Stations this session:</h3>
-  <div *ngFor="let item of sessionList">
-    <p>{{ item.name }}</p>
-    <p (click)="radioService.loadStation(item)">Reload?</p>
+<div class="container" *ngIf="sessionList.length > 0" data-aos="fade-down">
+  <h2 class="container__heading">Stations this session:</h2>
+  <div *ngFor="let item of sessionList" data-aos="fade-up">
+    <p class="container__station" (click)="radioService.loadStation(item)">{{item.name}}</p>
   </div>
 </div>

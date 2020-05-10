@@ -13,20 +13,23 @@ export class PlayerComponent implements OnInit {
   public static = new Howl({
     src: 'assets/static.mp3',
     format: 'mp3',
-    volume: this.radioService.volume});
+    volume: this.radioService.volume,
+    loop: true});
   public currentStation: StationModel;
   public stationError: boolean;
   public loading = true;
   public loaded = false;
+  public playing = false;
+  public paused = true;
 
   constructor(private radioService: RadioService) {
   }
 
   ngOnInit(): void {
     this.radioService.stationErrorChange.subscribe(value => {
+      this.static.unload();
       this.stationError = value;
       if (this.stationError && this.sound){
-        this.static.unload();
         this.sound.unload();
         this.currentStation = undefined;
         this.sound = undefined;
@@ -47,6 +50,7 @@ export class PlayerComponent implements OnInit {
       }
       this.sound.on('load', () => {
         this.static.unload();
+        this.playing = true;
         this.loaded = true;
         this.loading = false;
         this.radioService.addToSessionList();
@@ -63,19 +67,21 @@ export class PlayerComponent implements OnInit {
       src: [radioUrl],
       format: [radioFormat],
       volume: this.radioService.volume,
-      html5: true,
-      autoplay: false
+      autoplay: false,
+      html5: true
     });
   }
 
   public play = () => {
     if (!this.sound.playing()){
       this.sound.play();
+      this.playing = true;
     }
   }
 
   public pause = () => {
     this.sound.pause();
+    this.paused = true;
   }
 
   public setVolume = (event) => {
@@ -87,5 +93,4 @@ export class PlayerComponent implements OnInit {
   public capitalizeFirstLetter = (text) => {
     return text.charAt(0).toUpperCase() + text.slice(1);
   }
-
 }
