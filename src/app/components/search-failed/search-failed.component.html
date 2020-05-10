@@ -1,12 +1,6 @@
-<div class="container">
-  <p>Sadly that search came up with nothing... try something else</p>
+<div class="container" data-aos="fade-up">
+  <h2 class="container__text">That search didn't return anything, maybe try one of these?</h2>
+  <div class="container__suggestions">
+    <p class="container__suggestions--item" *ngFor="let item of randomList" (click)="prepSearch(item.name); this.radioService.getRadioStation(item.name)">{{ item.name }}</p>
+  </div>
 </div>
-
-
-<!--CURRENTLY IN HIDING DUE TO BUG -> TODO:CURRENTLY IN HIDING DUE TO BUG-->
-<!--<div class="container">-->
-<!--  <h2>That search didn't return anything, maybe try one of these?</h2>-->
-<!--  <ul>-->
-<!--    <li *ngFor="let item of randomList" (click)="prepSearch(item)">{{ item }}</li>-->
-<!--  </ul>-->
-<!--</div>-->

@@ -1,5 +1,8 @@
 @import "src/styles.scss";
 
+$icon-size: 4rem;
+$icon-color: $faded-gray;
+
 .container {
   padding-top: 2rem;
 }
@@ -14,13 +17,17 @@
   }
   &__play {
     flex: 0 0 20%;
-    border: 1px solid black;
     &--icon{
+      height: $icon-size;
+      fill: $icon-color;
     }
   }
   &__pause{
     flex: 0 0 20%;
-    &--icon{}
+    &--icon{
+      height: $icon-size;
+      fill: $icon-color;
+    }
   }
   &__volume {
     flex: 0 0 40%;
@@ -31,10 +38,23 @@
 .loading {
   animation: flashing 1s linear infinite; }
 
+.playing {
+  fill: $lime-green;
+}
+
+.paused {
+  fill: $lime-green;
+}
+
+.inactive {
+  fill: $faded-gray;
+}
+
 .nowplaying {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  flex-wrap: wrap;
   h4 {
     font-size: 1.5rem;
     color: $lime-green;
@@ -59,7 +79,7 @@
 }
 
 mat-slider {
-  width: 10rem;
+  width: 15rem;
 }
 
 @keyframes flashing {

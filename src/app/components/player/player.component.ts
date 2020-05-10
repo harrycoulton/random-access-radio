@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Howl } from 'howler';
-import { RadioService } from '../../services/radio.service';
+import { RadioService } from '../../services/radio/radio.service';
 import { StationModel } from '../../models/station.model';
 
 @Component({
@@ -20,7 +20,7 @@ export class PlayerComponent implements OnInit {
   public loading = true;
   public loaded = false;
   public playing = false;
-  public paused = true;
+  public paused = false;
 
   constructor(private radioService: RadioService) {
   }
@@ -37,17 +37,25 @@ export class PlayerComponent implements OnInit {
     });
     this.radioService.currentStationChange.subscribe(value => {
       this.currentStation = value;
-      if (this.sound) {
-        this.sound.unload();
-        this.sound = undefined;
+      if (this.currentStation !== undefined){
+        this.loadStation();
       }
-      this.static.load();
-      this.static.play();
-      this.loaded = false;
-      this.loading = true;
-      if (!this.sound) {
-        this.setStation(this.currentStation.url, this.currentStation.codec);
-      }
+    });
+  }
+
+  public loadStation = () => {
+    if (this.sound) {
+      this.sound.unload();
+      this.sound = undefined;
+    }
+    this.static.load();
+    this.static.play();
+    this.loaded = false;
+    this.loading = true;
+    if (!this.sound && this.currentStation) {
+      this.setStation(this.currentStation.url, this.currentStation.codec);
+    }
+    if (this.sound){
       this.sound.on('load', () => {
         this.static.unload();
         this.playing = true;
@@ -58,8 +66,8 @@ export class PlayerComponent implements OnInit {
       this.sound.on('loaderror', () => {
         this.radioService.getRadioStation(this.radioService.currentSearchTerm);
       });
-      this.sound.play();
-    });
+    }
+    this.sound.play();
   }
 
   public setStation = (radioUrl, radioFormat) => {
@@ -76,11 +84,13 @@ export class PlayerComponent implements OnInit {
     if (!this.sound.playing()){
       this.sound.play();
       this.playing = true;
+      this.paused = false;
     }
   }
 
   public pause = () => {
     this.sound.pause();
+    this.playing = false;
     this.paused = true;
   }
 

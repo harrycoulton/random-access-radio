@@ -10,12 +10,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { SessionInfoComponent } from './components/session-info/session-info.component';
 import { PlayerContainerComponent } from './components/player-container/player-container.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSliderModule} from '@angular/material/slider';
+import { MatSliderModule } from '@angular/material/slider';
 import { SearchFailedComponent } from './components/search-failed/search-failed.component';
-import {NgMarqueeModule} from 'ng-marquee';
-import { SpeakerComponent } from './components/speaker/speaker.component';
+import { NgMarqueeModule } from 'ng-marquee';
 import { HifiComponent } from './components/hifi/hifi.component';
-
+import { TagsConfig } from './services/tags/tags.config';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,6 @@ import { HifiComponent } from './components/hifi/hifi.component';
     SessionInfoComponent,
     PlayerContainerComponent,
     SearchFailedComponent,
-    SpeakerComponent,
     HifiComponent
   ],
   imports: [
@@ -37,7 +35,7 @@ import { HifiComponent } from './components/hifi/hifi.component';
     MatSliderModule,
     NgMarqueeModule
   ],
-  providers: [],
+  providers: [TagsConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

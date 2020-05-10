@@ -1,0 +1,24 @@
+@import "src/styles.scss";
+
+.container {
+  padding-top: 2rem;
+  &__text {
+    color: $lime-green;
+  }
+  &__suggestions {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 1rem;
+    flex-wrap: wrap;
+    &--item{
+      padding: 1rem;
+      margin: 1rem;
+      background: $faded-gray;
+      border-radius: 10px;
+      cursor: pointer;
+      &:hover {
+        background: $faded-gray-hover;
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {RadioService} from '../../services/radio.service';
+import {RadioService} from '../../services/radio/radio.service';
 
 @Component({
   selector: 'app-session-info',
