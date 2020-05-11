@@ -37,3 +37,52 @@ $search-padding: 1rem;
     }
   }
 }
+
+@media only screen and (max-width: 1200px){
+  .container {
+    &__searchbox {
+      padding: $search-padding * 0.8;
+      font-size: $search-size * 0.8;
+    }
+    &__go {
+      padding: $search-padding * 0.8;
+      font-size: $search-size * 0.8;
+      margin-left: 1rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 800px){
+  .container {
+    &__searchbox {
+      padding: $search-padding * 0.6;
+      font-size: $search-size * 0.6;
+    }
+    &__go {
+      padding: $search-padding * 0.6;
+      font-size: $search-size * 0.6;
+      margin-left: 1rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px){
+  .container {
+    &__searchbox {
+      padding: $search-padding * 0.5;
+      font-size: $search-size * 0.5;
+    }
+    &__go {
+      padding: $search-padding * 0.5;
+      font-size: $search-size * 0.5;
+    }
+  }
+}
+
+@media only screen and (max-width: 400px){
+  .container {
+    &__searchbox{
+      width: 200px;
+    }
+  }
+}

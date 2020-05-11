@@ -22,3 +22,31 @@
     }
   }
 }
+
+@media only screen and (max-width: 1000px){
+  .container {
+    padding-top: 1rem;
+    &__text {
+      font-size: $heading-size * 0.6;
+    }
+    &__suggestions {
+      &--item{
+        font-size: $normal-text * 0.6;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 800px){
+  .container {
+    padding-top: 1rem;
+    &__text {
+      font-size: $heading-size * 0.4;
+    }
+    &__suggestions {
+      &--item{
+        font-size: $normal-text * 0.4;
+      }
+    }
+  }
+}

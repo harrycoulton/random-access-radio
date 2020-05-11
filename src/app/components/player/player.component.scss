@@ -1,7 +1,10 @@
 @import "src/styles.scss";
+@import "src/global-styles/config.scss";
 
 $icon-size: 4rem;
 $icon-color: $faded-gray;
+$large-text: 1.5rem;
+$medium-text: 1.2rem;
 
 .container {
   padding-top: 2rem;
@@ -31,7 +34,6 @@ $icon-color: $faded-gray;
   }
   &__volume {
     flex: 0 0 40%;
-    &--icon{}
   }
 }
 
@@ -56,12 +58,12 @@ $icon-color: $faded-gray;
   align-items: flex-start;
   flex-wrap: wrap;
   h4 {
-    font-size: 1.5rem;
+    font-size: $large-text;
     color: $lime-green;
     margin-bottom: 0.7rem;
   }
   h5 {
-    font-size: 1.2rem;
+    font-size: $medium-text;
     color: $digital-green;
     margin-bottom: 0.4rem;
   }
@@ -91,3 +93,63 @@ mat-slider {
     opacity: 1; }
   to {
     opacity: 0; } }
+
+@media only screen and (max-width: 1200px) {
+  .nowplaying {
+    h4 {
+      font-size: $large-text * 0.8;
+    }
+    h5 {
+      font-size: $medium-text * 0.8;
+    }
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .player {
+    &__controls {
+    }
+    &__play {
+      &--icon{
+        height: $icon-size * 0.8;
+      }
+    }
+    &__pause{
+      &--icon{
+        height: $icon-size * 0.8;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .mat-slider-horizontal {
+    width: 200px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .mat-slider-horizontal {
+    width: 80px;
+  }
+  .nowplaying {
+    h4 {
+      font-size: $large-text * 0.5;
+    }
+    h5 {
+      font-size: $medium-text * 0.5;
+    }
+  }
+  .player {
+    &__play {
+      &--icon{
+        height: $icon-size * 0.6;
+      }
+    }
+    &__pause{
+      &--icon{
+        height: $icon-size * 0.6;
+      }
+    }
+  }
+}

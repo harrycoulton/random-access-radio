@@ -8,6 +8,7 @@ import {RadioService} from '../../services/radio/radio.service';
 })
 export class SessionInfoComponent implements OnInit {
   public sessionList = [];
+  public testes = true;
 
   constructor(public radioService: RadioService) {
   }

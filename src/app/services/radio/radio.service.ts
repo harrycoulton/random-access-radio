@@ -18,7 +18,6 @@ export class RadioService {
   public sessionListChange: BehaviorSubject<StationModel[]> = new BehaviorSubject<StationModel[]>(this.sessionList);
   public currentStationChange: BehaviorSubject<StationModel> = new BehaviorSubject<StationModel>(this.currentStation);
   public showPlayer: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public errorCounter = 0;
 
   constructor(private http: HttpClient) {}
 
@@ -29,8 +28,6 @@ export class RadioService {
           .subscribe(
             data => {
               if (!Object.keys(data).length){
-                this.errorCounter++;
-                console.log('Service: ' + this.errorCounter);
                 this.currentStation = undefined;
                 this.stationError = true;
                 this.stationErrorChange.next(this.stationError);

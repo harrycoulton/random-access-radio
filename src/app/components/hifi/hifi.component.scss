@@ -1,12 +1,11 @@
 @import "src/styles.scss";
 
-$heading-size: 3rem;
 
 :host {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 100vh;
+  min-height: 100vh;
   padding-top: 10rem;
 }
 
@@ -31,5 +30,63 @@ $heading-size: 3rem;
   }
   &__session {
     flex: 0 0 35%;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .container {
+    &__main-module {
+      padding-right: 1rem;
+      &__text {
+        padding-bottom: 1rem;
+        &--heading {
+          font-size: $heading-size * 0.8;
+          padding-bottom: 0.2rem;
+        }
+        &--instructions {
+          font-size: $normal-text * 0.8;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  :host {
+    padding-top: 4rem;
+  }
+  .container {
+    flex: 0 0 90%;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .container {
+    &__main-module {
+      &__text {
+        &--heading {
+          font-size: $heading-size * 0.6;
+        }
+        &--instructions {
+          font-size: $normal-text * 0.6;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .container {
+    &__main-module {
+      &__text {
+        &--heading {
+          font-size: $heading-size * 0.4;
+        }
+        &--instructions {
+          font-size: $normal-text * 0.4;
+        }
+      }
+    }
   }
 }

@@ -25,3 +25,48 @@
     }
   }
 }
+
+@media only screen and (max-width: 1000px){
+  .container {
+    padding: {
+      top: 0.5rem;
+      left: 0.5rem;
+    }
+    border-top: 1px solid $faded-gray;
+    border-left: none;
+    &__station-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      flex-direction: column-reverse;
+    }
+    &__station {
+      padding: 5px;
+      margin-bottom: 0.4rem;
+      max-width: 50%;
+      word-wrap: break-spaces;
+    }
+  }
+}
+
+@media only screen and (max-width: 800px){
+  .container {
+    &__heading {
+      font-size: $heading-size * 0.5;
+    }
+    &__station {
+      font-size: $normal-text * 0.5;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px){
+  .container {
+    &__heading {
+      font-size: $heading-size * 0.4;
+    }
+    &__station {
+      font-size: $normal-text * 0.4;
+    }
+  }
+}
