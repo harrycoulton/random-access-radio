@@ -10,7 +10,8 @@ export class PlayerContainerComponent implements OnInit {
   public player: boolean;
   public stationError: boolean;
 
-  constructor(public radioService: RadioService) { }
+  constructor(public radioService: RadioService) {
+  }
 
   ngOnInit(): void {
     this.radioService.showPlayer.subscribe(value => {

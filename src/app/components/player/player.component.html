@@ -34,7 +34,7 @@
       <span class="nowplaying--info" *ngIf="currentStation.region">{{ currentStation.region }}, </span>
       <span class="nowplaying--info">{{ currentStation.country }}</span>
     </h5>
-    <h5>Tags: <span class="nowplaying--info"> {{ currentStation.tags }}</span></h5>
+    <h5 class="nowplaying__tags">Tags: <span class="nowplaying--info"> {{ currentStation.tags }}</span></h5>
     <h5 *ngIf="currentStation.homepage"><a class="nowplaying__link" [href]="currentStation.homepage" target="_blank">Visit homepage</a></h5>
   </div>
 </div>

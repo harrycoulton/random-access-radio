@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Howl } from 'howler';
 import { RadioService } from '../../services/radio/radio.service';
 import { StationModel } from '../../models/station.model';
@@ -21,6 +21,7 @@ export class PlayerComponent implements OnInit {
   public loaded = false;
   public playing = false;
   public paused = false;
+  @Input() public Harry;
 
   constructor(private radioService: RadioService) {
   }
@@ -36,24 +37,28 @@ export class PlayerComponent implements OnInit {
       }
     });
     this.radioService.currentStationChange.subscribe(value => {
-      this.currentStation = value;
-      if (this.currentStation !== undefined){
-        this.loadStation();
+      if (value.name){
+        if (value !== undefined){
+          this.loadStation(value);
+        }
       }
     });
   }
 
-  public loadStation = () => {
+  public loadStation = (station) => {
+    this.currentStation = station;
     if (this.sound) {
       this.sound.unload();
       this.sound = undefined;
     }
     this.static.load();
     this.static.play();
+    this.playing = false;
+    this.paused = false;
     this.loaded = false;
     this.loading = true;
-    if (!this.sound && this.currentStation) {
-      this.setStation(this.currentStation.url, this.currentStation.codec);
+    if (!this.sound && station) {
+      this.setStation(station.url, station.codec);
     }
     if (this.sound){
       this.sound.on('load', () => {

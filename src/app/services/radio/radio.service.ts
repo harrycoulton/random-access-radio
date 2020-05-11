@@ -14,10 +14,11 @@ export class RadioService {
   public volume: number;
   public stationError = false;
   public searchTermChange: BehaviorSubject<string> = new BehaviorSubject<string>(this.currentSearchTerm);
-  public stationErrorChange: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public stationErrorChange: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.stationError);
   public sessionListChange: BehaviorSubject<StationModel[]> = new BehaviorSubject<StationModel[]>(this.sessionList);
   public currentStationChange: BehaviorSubject<StationModel> = new BehaviorSubject<StationModel>(this.currentStation);
   public showPlayer: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public errorCounter = 0;
 
   constructor(private http: HttpClient) {}
 
@@ -28,6 +29,8 @@ export class RadioService {
           .subscribe(
             data => {
               if (!Object.keys(data).length){
+                this.errorCounter++;
+                console.log('Service: ' + this.errorCounter);
                 this.currentStation = undefined;
                 this.stationError = true;
                 this.stationErrorChange.next(this.stationError);
@@ -70,9 +73,9 @@ export class RadioService {
   }
 
   public loadStation = (station) => {
+    this.showPlayer.next(true);
     this.currentStation = station;
     this.stationError = false;
-    this.showPlayer.next(true);
     this.stationErrorChange.next(this.stationError);
     this.currentStationChange.next(this.currentStation);
   }

@@ -76,6 +76,10 @@ $icon-color: $faded-gray;
       cursor: pointer;
     }
   }
+  &__tags {
+    flex-wrap: wrap;
+    word-break: break-word;
+  }
 }
 
 mat-slider {
